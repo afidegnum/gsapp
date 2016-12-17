@@ -1,0 +1,92 @@
+Project Budget Amount
+Date updated
+CSO name
+District
+Projects Village
+DMTDP | AAP
+Was the project identified and selected in consultation with community stakeholders based on their document needs?
+Was the project prepared in line with MoFEP Composite budget manual?
+Has District Got a procurement Plan in place and has the plan been updated as required?
+Was the project advertised in 2 different print media outlets and Public Procurement Authority?
+Did the District properly constitute Tender Evaluation Panels as required?
+Was there proper Documentation on Bid Opening?
+Did the  District officially write to notify all bidders from the winner of the contract?
+Did the winning Contractor provide performance securities for the contract?
+Was teh contract signed by an authorized person?
+Is the project contact sum in line with budget? (Wether  +/- 10% range)?
+Are the District Assembly officials playing their expected oversight roles( monitoring of the project)
+Has the District Engineer been supervising the work?
+Are Payment Timelines made in line with the terms of contracts?
+Does the District conduct detailed check on the Contractors work performance before payments are made?
+Does the District Engineer prepare Interim Payment Certificates for each payment?
+Does hte District Keep the required percentage of retention from each interim payment?
+Did the engineer issue completion and defect liability certificates to the contractor before his final payment?
+Was the contractor paid his retention after the defect liability period?
+Did the District evaluate their performance in hte implementation of the Project?
+After Completion of the project, did hte District carry out a Project impact Evaluation to access the achievement of the intended benefits?
+Did the project Achieve its intended objectives?
+Was the top Soil removed from the site?
+Observation about the soil removal
+is is the site fenced to prevent public from having direct access to the site?
+Observation about fencing.
+Were cake cements being used?
+Observation of the caked cement
+Does the Sand used in mixing mortar and concrete contain clay or plant roots?
+Observation about mixing
+Were Quality coarse aggregates (gravel) used?
+Observation about gravel quality
+
+Were iron rods stored off ground?
+Were the iron rods showing signs of rusing?
+Observation about iron rods rusting
+Was Mortar and concret hand mixed (using shovel) on bare ground?
+Observation about mixing on ground
+
+Were the sand and gravel measured before mixing?
+Observation about measurement
+Were hardened mortar and concrete remixed for use?
+obsevations about remixing
+Were Concrete Casted in place cure?
+Observations about Concrete Curing
+Were the joints between blocks sprayed with water before filling with mortar?
+Observation about blocks being sprayed
+Were the concrete and block wall sprayed with water before screeding and plastering?
+Observations about walls being sprayed
+Were the roof rafters fixed directly into the wall of the building?
+Observations about the rafters being fixed
+
+
+
+Project Progress compared to Contactor's work schedule
+Project being built according to specifications
+Contractor regularly on site?
+
+Key positive Observations
+Key negative Observations
+Key Challenge requiring Attention to DSC to redress
+
+Dates when field observation made
+
+Final issues to report
+
+Picture coordinates
+
+
+#filter proejct from cso-ID
+- list_project
+    -   list_stage
+    -   List_gallery
+
+    |Update Stage
+        List all stages
+            Add Activity
+                Add Gallery
+     | Update Project
+        Load Questionnaires
+            display_fields
+
+
+
+
+
+

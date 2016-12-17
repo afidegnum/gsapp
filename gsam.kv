@@ -1,0 +1,595 @@
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: import Image kivy.uix.image.Image
+#:import la kivy.adapters.listadapter
+#:import factory kivy.factory
+#:import lv kivy.uix.listview
+
+
+MyScreenManager:
+    IntroScreen:
+    ProjectScreen:
+    ProjectEditScreen:
+    ProjectActivityScreen:
+    FormScreen:
+    MediaScreen:
+    ListingScreen:
+    ActivityScreen:
+    MessageScreen:
+    ProfileScreen
+
+<IntroScreen>:
+    name: 'main'
+    BoxLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        padding: 100, 100
+
+        Button:
+            id: 'introButton'
+            on_release: app.root.current = 'main'
+            background_color: 0,0,0,0
+            Image:
+                source: 'home.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: 'projectsButton'
+            on_release: app.root.current = 'projects'
+            background_color: 0,0,0,0
+            Image:
+                source: 'projects.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: 'activityButton'
+            on_release: app.root.current = 'activity'
+            background_color: 0,0,0,0
+            Image:
+                source: 'activities.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: 'msgButton'
+            on_release: app.root.current = 'messages'
+            background_color: 0,0,0,0
+            Image:
+                source: 'messages.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: 'profileButton'
+            on_release: app.root.current = 'profile'
+            background_color: 0,0,0,0
+            Image:
+                source: 'myprofile.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+
+
+<ProjectScreen>:
+    name: 'projects'
+    ListView:
+        item_strings: app.projects
+        id: projects
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            padding: 50, 50
+            size_hint_x: .8
+            size_hint_y: .3
+            Button:
+                id: 'introButton'
+                on_release: app.root.current = 'listingscreen'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'home.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+            Button:
+                id: 'projectsButton'
+                on_release: app.root.current = 'projects'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'projects.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+#            Button:
+#                id: 'update_project'
+#                on_release: app.root.current = 'updateproject'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'projects.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
+
+
+
+            Button:
+                id: 'project_activities'
+                on_release: app.root.current = 'projactivities'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'projects.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'activityButton'
+                on_release: app.root.current = 'activity'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'activities.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'msgButton'
+                on_release: app.root.current = 'messages'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'messages.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'profileButton'
+                on_release: app.root.current = 'profile'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'myprofile.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+
+
+#
+#<StageBox>:
+#    BoxLayout:
+#        BoxLayout:
+#            size_hint:(.1, None)
+#        ListView:
+#            size_hint: .8,.9
+#            adapter:
+#                la.ListAdapter(
+#                data=app.stage_list,
+#                cls=factory.Factory.MenuButton,
+#                selection_mode='single',
+#                allow_empty_selection=True)
+                #args_converter=root.args_converter)
+
+
+#<UpdateProject>:
+#    BoxLayout:
+#        BoxLayout:
+#            size_hint:(.1, None)
+#        ListView:
+#            size_hint: .8,.9
+#            adapter:
+#                la.ListAdapter(
+#                data=app.additional_details,
+#                cls=factory.Factory.MenuButton,
+#                selection_mode='single',
+#                allow_empty_selection=True)
+#                #args_converter=root.args_converter)
+#
+#<EntryBox>:
+#    BoxLayout:
+#        size_hint:(.1, None)
+#        Label:
+#            text: "Add Activity Details"
+#        TextInput:
+#            id: activity_title
+#        TextInput:
+#            id: activity_description
+#            multiline: True
+#            Button:
+#                id: close_window
+#                text: 'X'
+
+
+#<CameraBox>:
+#    AnchorLayout:
+#        anchor_x: 'center'
+#        anchor_y: 'bottom'
+#
+#        BoxLayout:
+#            id: camera
+#            play: True
+#        ToggleButton:
+#            on_press: camera.play = True
+#            size_hint_y: None
+#            height: '48dp'
+#        Button:
+#            id: close_window
+#            text: 'X'
+
+#<ProjectActivityScreen>:
+#    name: 'projectsactiv'
+#    ListView:
+#        item_strings: app.projects
+#        id: projects
+#        BoxLayout:
+#            padding: 50, 50
+#            size_hint_x: .8
+#            size_hint_y: .3
+#
+#
+#
+#            Button:
+#                id: 'projectsButton'
+#                on_release: app.root.current = 'projects'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'projects.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
+#
+#            Button:
+#                id: 'update_project'
+#                on_release: app.root.current = 'updateproject'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'projects.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
+#
+#            Button:
+#                id: 'project_activities'
+#                on_release: app.root.current = 'projectsactiv'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'projects.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
+
+
+
+#<ProjectEditScreen>:
+#    name: 'updateproject'
+#    ListView:
+#        item_strings: app.projects
+#        id: projects
+#
+#
+#    AnchorLayout:
+#        anchor_x: 'center'
+#        anchor_y: 'bottom'
+#        BoxLayout:
+#            padding: 50, 50
+#            size_hint_x: .8
+#            size_hint_y: .3
+#
+#            Button:
+#                id: 'projectsButton'
+#                on_release: app.root.current = 'projects'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'projects.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
+#
+#            Button:
+#                id: 'update_project'
+#                on_release: app.root.current = 'updateproject'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'projects.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
+#
+#            Button:
+#                id: 'project_activities'
+#                on_release: app.root.current = 'projectsactiv'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'projects.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
+
+
+<LocalEvents>:
+    BoxLayout:
+        size_hint:(.1, None)
+        Label:
+            text: "Local Events"
+        TextInput:
+            id: event_title
+        TextInput:
+            id: event_description
+            multiline: True
+        Button:
+            id: save_event
+        Button:
+            id: close_window
+            text: 'X'
+
+
+<ActivityScreen>:
+    name: 'activity'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            padding: 50, 50
+            size_hint_x: .8
+            size_hint_y: .3
+            Button:
+                id: 'introButton'
+                on_release: app.root.current = 'main'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'home.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'projectsButton'
+                on_release: app.root.current = 'projects'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'projects.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'activityButton'
+                on_release: app.root.current = 'activity'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'activities.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'msgButton'
+                on_release: app.root.current = 'messages'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'messages.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'profileButton'
+                on_release: app.root.current = 'profile'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'myprofile.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+
+
+<MessageScreen>:
+    name: 'messages'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            padding: 50, 50
+            size_hint_x: .8
+            size_hint_y: .3
+            Button:
+                id: 'introButton'
+                on_release: app.root.current = 'main'
+                background_color: 0,0,0,0
+                Label:
+                    text: "Messages"
+                Image:
+                    source: 'home.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+                    Label:
+                        text: " mesages"
+
+            Button:
+                id: 'projectsButton'
+                on_release: app.root.current = 'projects'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'projects.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'activityButton'
+                on_release: app.root.current = 'activity'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'activities.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'msgButton'
+                on_release: app.root.current = 'messages'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'messages.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'profileButton'
+                on_release: app.root.current = 'profile'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'myprofile.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+
+
+<ProfileScreen>:
+    name: 'profile'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            padding: 50, 50
+            size_hint_x: .8
+            size_hint_y: .3
+            Button:
+                id: 'introButton'
+                on_release: app.root.current = 'main'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'home.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'projectsButton'
+                on_release: app.root.current = 'projects'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'projects.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'activityButton'
+                on_release: app.root.current = 'activity'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'activities.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'msgButton'
+                on_release: app.root.current = 'messages'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'messages.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+            Button:
+                id: 'profileButton'
+                on_release: app.root.current = 'profile'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'myprofile.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 70, 70
+
+
+
+
+<SelectableLabel>:
+    id: 'selectables'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            padding: 50, 50
+            size_hint_x: .8
+            size_hint_y: .3
+            Button:
+                id: 'updateproject'
+                on_release: app.root.current = 'basicform'
+                background_color: 0,0,0,0
+                Image:
+                    source: 'home.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 30, 30
+            Label:
+                text: root.text
+            Button:
+                id: 'loadmedia'
+                on_release: self.load_media
+                background_color: 0,0,0,0
+                Image:
+                    source: 'projects.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 30, 30
+
+<FormScreen>:
+    name: 'basicform'
+    GridLayout:
+        cols:1
+        TextInput:
+            id: _a
+            text: '3'
+        TextInput:
+            id: _b
+            text: '5'
+        Label:
+            id: _result
+        Button:
+            text: 'sum'
+            # You can do the opertion directly
+            on_press: _result.text = str(int(_a.text) + int(_b.text))
+        Button:
+            text: 'product'
+            # Or you can call a method from the root class (instance of calc)
+            on_press: root.product(*args)
+<MediaScreen>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)
+<ListingScreen>:
+    name: 'listingscreen'
+    RV:
+        viewclass: 'SelectableLabel'
+        SelectableRecycleBoxLayout:
+            default_size: None, dp(56)
+            default_size_hint: 1, None
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: 'vertical'
+            multiselect: False
+            touch_multiselect: False
+            update_form: 'updateproject'
