@@ -1,0 +1,66 @@
+Manifest-Version: 1.0
+Created-By: 1.0 (Android)
+
+Name: assets/private.mp3
+SHA1-Digest: 9EoNDhKrZDkyYjXEAtZNBvVpJyk=
+
+Name: AndroidManifest.xml
+SHA1-Digest: oIlSgwDpD6+Y1YIr61eVo92Dqcw=
+
+Name: res/layout/chooser_item.xml
+SHA1-Digest: vHQiRy+X7Oum36pxLNmVRm5/Cps=
+
+Name: res/drawable/icon.png
+SHA1-Digest: OQtS2RLcQQAKZYT7SG/VI1N2kUw=
+
+Name: res/layout/main.xml
+SHA1-Digest: 0j9BoK5YAJnpASe/yHy6jFONOhc=
+
+Name: lib/armeabi/libsdl_mixer.so
+SHA1-Digest: ydbaiGS88QEX+0rS9B04owWhaGw=
+
+Name: lib/armeabi/libsdl_ttf.so
+SHA1-Digest: 2MyPHqf0vzji89RbpWcttnbhumM=
+
+Name: lib/armeabi/_ctypes_test.so
+SHA1-Digest: uGXbmoHV09g7aYhqzNzumIi1jtM=
+
+Name: lib/armeabi/libsqlite3.so
+SHA1-Digest: wa6w6bIWsy5Ft1TlzPsgr+A/Wu4=
+
+Name: lib/armeabi/libjpeg.so
+SHA1-Digest: hOum/r3g4CwBu/EYIEOc2LaDyZg=
+
+Name: res/layout/project_chooser.xml
+SHA1-Digest: J/BRXOWkxvvCGlmJFTLGnfNhNNw=
+
+Name: lib/armeabi/libapplication.so
+SHA1-Digest: NvQn1jH0OFLE2drHMqA7gQzOd6w=
+
+Name: lib/armeabi/libpython2.7.so
+SHA1-Digest: SdYF7vdF4Of4a6yeK+IH+LuofMg=
+
+Name: lib/armeabi/_ctypes.so
+SHA1-Digest: L46aZf1ePahDlTZhsqA3asfuYfc=
+
+Name: res/layout/project_empty.xml
+SHA1-Digest: T2cZ2h7BMSn92o4fXEVS1bqtPPA=
+
+Name: res/drawable/presplash.jpg
+SHA1-Digest: xMSFR7q4nuqvzGELe2FjFP3zgZY=
+
+Name: resources.arsc
+SHA1-Digest: vbedoYdTrBwV/HCdlAQ7SRM65Ik=
+
+Name: lib/armeabi/libsdl_main.so
+SHA1-Digest: IEfsGPyhuxX+qDWLnd8jnkYycdA=
+
+Name: classes.dex
+SHA1-Digest: lLBcQ4Lr1b5M+8GCpC9mgUz0XrA=
+
+Name: lib/armeabi/libsdl.so
+SHA1-Digest: nE7b5nXe/QwxDhX9FSzvWDf4FFQ=
+
+Name: lib/armeabi/libsdl_image.so
+SHA1-Digest: S6Jab9hf29QkFANDqO1EWA5Qmnc=
+

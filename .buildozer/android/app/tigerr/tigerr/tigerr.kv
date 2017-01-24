@@ -1,0 +1,194 @@
+#:kivy 1.9.2
+# RecycleView is new in 1.9.2 and replaces ListView (deprecated in 1.9.2).
+
+#:import browser webbrowser
+
+#:set _fsize dp(12)
+
+#:include widgets/queryrow.kv
+#:include widgets/patchsetrow.kv
+#:include widgets/addquery.kv
+
+# orientation: 'horizontal' --> y, top and center_y may be used for pos hints
+#              [ horiz | horiz ]
+
+# orientation: 'vertical' --> x, right and center_x may be used
+#              [ vert ]
+#              [ ---- ]
+#              [ vert ]
+
+
+# Tigerr is a BoxLayout containing 2 side-by-side panes featuring RecycleViews
+# and appropriate controls above each pane with a title label
+<Tigerr>:
+    canvas:
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    # (A)
+    orientation: 'vertical'
+    cols: 1
+    rows: 3
+    queries: queries
+    patchsets: patchsets
+    # TODO:
+    cache_size: 0
+    BoxLayout:
+        size_hint: (None, None)
+        height: dp(24)
+        orientation: 'horizontal'
+        cols: 4
+        rows: 1
+        MenuButton:
+            text: 'file'
+        MenuButton:
+            text: 'edit'
+        MenuButton:
+            text: 'view'
+        Label:
+            # local cache info 
+            font_blending: False
+            text_size: [root.width + 4, self.height + 2]
+            font_size: dp(11)
+            width: self.width
+            text: 'cache size: ' + str(root.cache_size)
+            valign: 'middle'
+            halign: 'right'
+            height: dp(12)
+            multiline: False
+            font_name: 'fonts/Vera.ttf'
+    BoxLayout:
+        size_hint_y: 0.9
+        canvas:
+            Color:
+                rgba: 0.4, 0.4, 0.4, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        # (B)
+        orientation: 'horizontal'
+        cols: 2
+        rows: 1
+        spacing: 5
+        BoxLayout:
+            # (C)
+            canvas:
+                Color:
+                    rgba: 0.4, 0.4, 0.4, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            orientation: 'vertical'
+            cols: 1
+            rows: 2
+            size_hint: (0.3, 1.0)
+            size: (q.width, root.height)
+            PanelHeader:
+                id: q
+                width: dp(140)
+                text: 'Queries'
+                bold: True
+            AddQueryButton:
+                text: 'create'
+            RecycleView:
+                id: queries
+                scroll_type: ['bars', 'content']
+                scroll_wheel_distance: dp(124)
+                bar_width: dp(8)
+                viewclass: 'QueryRow'
+                RecycleBoxLayout:
+                    default_size: None, dp(25)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+                    spacing: dp(5)
+        BoxLayout:
+            # (D)
+            canvas:
+                Color:
+                    rgba: 0.35, 0.35, 0.35, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            orientation: 'vertical'
+            cols: 1
+            rows: 3
+            size_hint: (1.0, 1.0)
+            PanelHeader:
+                text: 'Patchsets'
+            Label:
+                size_hint: (None, None)
+                height: dp(10)
+                text: ''
+            RecycleView:
+                id: patchsets
+                scroll_type: ['bars', 'content']
+                scroll_wheel_distance: dp(124)
+                bar_width: dp(10)
+                viewclass: 'PatchsetRow'
+                RecycleBoxLayout:
+                    default_size: None, dp(50)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+                    spacing: dp(5)
+    BoxLayout:
+        size_hint: (None, None)
+        height: dp(24)
+        orientation: 'vertical'
+        cols: 3
+        rows: 1
+        Label:
+            font_name: 'fonts/Vera.ttf'
+            multiline: False
+            height: dp(14)
+            font_size: dp(10)
+            text_size: [root.width, dp(12)]
+            opacity: 0.25
+            text: str(app.banner_message)
+            valign: 'middle'
+            halign: 'right'
+
+
+<AddQueryButton@Button>:
+    text: ''
+    size_hint: (None, None)
+    pos_hint: {'right': 1.0}
+    text_size: self.size
+    width: dp(50)
+    height: dp(15)
+    valign: 'top'
+    halign: 'center'
+    font_size: dp(9)
+    font_name: 'fonts/Vera.ttf'
+    on_release: app.show_add_query()
+
+
+<PanelHeader@Label>:
+    text: ''
+    color: 1, 1, 1, 0.5
+    size_hint: (None, None)
+    padding: 5, 5
+    text_size: root.width, self.height
+    valign: 'top'
+    halign: 'left'
+    height: dp(25)
+    width: self.width
+    font_size: dp(15)
+    bold: True
+    font_name: 'fonts/Vera-Bold.ttf'
+
+
+<MenuButton@Button>:
+    font_size: dp(12)
+    size_hint: (None, None)
+    size: dp(50), dp(25)
+    padding_x: dp(12)
+    padding_y: dp(6)
+    text_size: self.size
+    text: ''
+    multiline: False

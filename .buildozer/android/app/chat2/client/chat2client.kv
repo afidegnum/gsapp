@@ -1,0 +1,126 @@
+#: import maa stuff.rv_button.RV_Button
+#: import mav stuff.rv_button.RV_Label
+#: import mac stuff.rv_button.RecycleBoxLayout22
+<Chat2Client>:
+    action_bar_color: 0.2, 0.2, 0.5, 1
+    input_bar_color: 0.23, 0.23, 0.5, 1
+    col_bright_blue: 0.35, 0.35, 0.73, 1
+    col_brighter_blue: 0.55, 0.55, 0.85, 1
+    col_default_red: 0.6, 0.2, 0.2, 1
+    col_button_send: 0.25, 0.2, 0.4, 1
+    col_button_menu: 0.27, 0.27, 0.5, 1
+    action_bar_height: cm(1)
+    input_height: cm(1)
+    action_bar_line_height: self.height - self.input_height
+    canvas.after:
+        Color:
+            rgba: root.col_bright_blue
+        Line:
+            points: 0, self.action_bar_line_height, root.width, self.action_bar_line_height
+    BoxLayout:
+        id: box1
+        orientation: 'horizontal'
+        size_hint: 1, None
+        height: root.action_bar_height
+        canvas.before:
+            Color:
+                rgba: root.action_bar_color
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            id: actionbar_label
+            text: ''
+            size_hint_x: None
+            width: root.width - menubtn.width
+            text_size: self.size
+            markup: True
+        Button:
+            id: menubtn
+            size_hint: None, 1
+            markup: True
+            width: self.texture_size[0] + dp(20)
+            background_color: 0, 0, 0, 0
+            text: '[size=26][color=#F2F2F2]Menu[/color][/size]'
+            on_press: root.send_message()
+            canvas.before:
+                Color:
+                    rgba: root.col_bright_blue
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+    RecycleView:
+        id: rv
+        size_hint: 1, None
+        height: root.height - root.action_bar_height - root.input_height
+        scroll_type: ['bars', 'content']
+        scroll_wheel_distance: dp(114)
+        do_scroll_x: False
+        do_scroll_y: True
+        bar_color: 0.15, 0.3, 0.6, 1
+        bar_inactive_color: 0.15, 0.3, 0.6, 0.4
+        bar_width: dp(10)
+        viewclass: 'RV_Label'
+        data: []
+        canvas.before:
+            Color:
+                rgba: 0.06, 0.06, 0.08, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        RecycleBoxLayout22:
+            id: rv_box
+            orientation: 'vertical'
+            size_hint: None, None
+            height: self.minimum_height
+            width: self.parent.width
+            default_size: None, cm(1)
+            default_size_hint: 1, None
+            spacing: '1dp'
+
+    BoxLayout:
+        size_hint: 1, None
+        height: root.input_height
+        orientation: 'horizontal'
+        canvas.before:
+            Color:
+                rgba: root.input_bar_color
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            id: username
+            text: ''
+            size_hint_x: None
+            width: self.texture_size[0]
+            markup: True
+        TextInput:
+            id: textbox
+            size_hint_x: None
+            width: self.parent.width - username.width - cm(3)
+            background_color: 0.12, 0.12, 0.18, 1
+            foreground_color: 1, 1, 1, 1
+            font_size: 19
+            cursor_color: root.col_brighter_blue
+            multiline: False
+            focus: True
+            text_color: 1, 1, 1, 1
+            on_text_validate: root.send_message(self.text)
+        Button:
+            size_hint_x: None
+            width: cm(3)
+            background_color: 0, 0, 0, 0
+            on_release: root.send_message(textbox.text)
+            canvas.before:
+                Color:
+                    rgba: root.col_button_send
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            Label:
+                size_hint: None, None
+                size: self.parent.size
+                pos_hint: None, None
+                pos: self.parent.pos
+                text: 'Send'

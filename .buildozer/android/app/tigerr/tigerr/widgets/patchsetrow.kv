@@ -1,0 +1,36 @@
+#:kivy 1.9.2
+
+<PatchsetRow@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    subject: ''
+    owned_by: ''
+    createdOnStr: ''
+    lastUpdatedStr: ''
+    GridLayout:
+        cols: 2
+        rows: 2
+        Button:
+            text: root.subject
+            shorten: True
+            font_size: dp(12)
+            text_size: self.size
+            font_name: 'fonts/Vera-Bold.ttf'
+            bold: True
+        PSLabel:
+            text: root.owned_by
+        PSLabel:
+            text: 'created on: ' + root.createdOnStr
+        PSLabel:
+            text: 'last update: ' + root.lastUpdatedStr
+
+<PSLabel@Label>:
+    text: ''
+    font_size: dp(10)
+    text_size: self.size
+    font_name: 'fonts/Vera.ttf'
+
