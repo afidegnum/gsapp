@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = My Application
+title = GsamApp
 
 # (str) Package name
-package.name = myapp
+package.name = gsapp
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.test
+package.domain = org.gsam
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -72,7 +72,7 @@ orientation = landscape
 fullscreen = 1
 
 # (list) Permissions
-#android.permissions = INTERNET
+android.permissions = INTERNET
 
 # (int) Android API to use
 #android.api = 19

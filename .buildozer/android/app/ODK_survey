@@ -37,7 +37,7 @@ Were Quality coarse aggregates (gravel) used?
 Observation about gravel quality
 
 Were iron rods stored off ground?
-Were the iron rods showing signs of rusing?
+Were the iron rods showing signs of rusting?
 Observation about iron rods rusting
 Was Mortar and concret hand mixed (using shovel) on bare ground?
 Observation about mixing on ground
@@ -70,5 +70,23 @@ Dates when field observation made
 Final issues to report
 
 Picture coordinates
+
+
+#filter proejct from cso-ID
+- list_project
+    -   list_stage
+    -   List_gallery
+
+    |Update Stage
+        List all stages
+            Add Activity
+                Add Gallery
+     | Update Project
+        Load Questionnaires
+            display_fields
+
+
+
+
 
 

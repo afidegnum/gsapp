@@ -1,8 +1,13 @@
 #: import FadeTransition kivy.uix.screenmanager.FadeTransition
 #: import Image kivy.uix.image.Image
-#:import la kivy.adapters.listadapter
+#: import la kivy.adapters.listadapter
+#: import factory kivy.factory
+#: import CheckBox kivy.uix.checkbox
+#:import ListItemButton kivy.uix.listview.ListItemButton
+#:import ListAdapter kivy.adapters.listadapter.ListAdapter
 #:import factory kivy.factory
-#:import lv kivy.uix.listview
+
+
 
 
 MyScreenManager:
@@ -10,12 +15,55 @@ MyScreenManager:
     ProjectScreen:
     ProjectEditScreen:
     ProjectActivityScreen:
+        id: project_acts
     ActivityScreen:
     MessageScreen:
     ProfileScreen
 
+<ProjectPops>:
+    size_hint: .2, .2
+    canvas.before:
+        Color:
+            rgb: 0.2,0.3,1,1
+
+<PaintWindow>:
+    orientation: 'vertical'
+
+<MenuPopup>:
+    id: mypop
+    size_hint: .8, .2
+
+    auto_dismiss: False
+    BoxLayout:
+        orientation: 'horizontal'
+
+        Button:
+
+            size: 500, 500
+            text: "Update"
+            on_release: app.root.current = 'projectsactiv'
+
+        Button:
+            size: 500, 500
+            text: "Edit Project"
+            on_release: app.root.current = 'updateproject'
+
+
+        Button:
+            size: 500, 500
+            text: "CloseWindows"
+            on_press: root.dismiss()
+
+
+
 <IntroScreen>:
     name: 'main'
+    canvas.before:
+        Color:
+            rgb: 0.2,0.3,1,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
     BoxLayout:
         anchor_x: 'center'
         anchor_y: 'center'
@@ -67,12 +115,31 @@ MyScreenManager:
                 center_y: self.parent.center_y
 
 
+<MenuButton>:
+    id: menubutt
+    size_hint_y: None
+    height: dp(44)
+    on_release: self.open_popmenu(self.text)
+
+
+<StageButton>:
+    id: stagebutt
+    size_hint_y: None
+    height: dp(44)
+    on_release: self.open_popmenu(self.text)
+
+
 
 <ProjectScreen>:
     name: 'projects'
     ListView:
-        item_strings: app.projects
-        id: projects
+        id: my_projects
+        adapter:
+            ListAdapter(data=app.projects,
+            cls=factory.Factory.MenuButton)
+
+
+
 
 
     AnchorLayout:
@@ -115,7 +182,7 @@ MyScreenManager:
 
             Button:
                 id: 'project_activities'
-                on_release: app.root.current = 'projactivities'
+                on_release: app.root.current = 'projectsactiv'
                 background_color: 0,0,0,0
                 Image:
                     source: 'projects.png'
@@ -154,12 +221,149 @@ MyScreenManager:
                     size: 70, 70
 
 
+
+#
+#<StageBox>:
+#    BoxLayout:
+#        BoxLayout:
+#            size_hint:(.1, None)
+#        ListView:
+#            size_hint: .8,.9
+#            adapter:
+#                la.ListAdapter(
+#                data=app.stage_list,
+#                cls=factory.Factory.MenuButton,
+#                selection_mode='single',
+#                allow_empty_selection=True)
+                #args_converter=root.args_converter)
+
+
+#<UpdateProject>:
+#    BoxLayout:
+#        BoxLayout:
+#            size_hint:(.1, None)
+#        ListView:
+#            size_hint: .8,.9
+#            adapter:
+#                la.ListAdapter(
+#                data=app.additional_details,
+#                cls=factory.Factory.MenuButton,
+#                selection_mode='single',
+#                allow_empty_selection=True)
+#                #args_converter=root.args_converter)
+#
+#<EntryBox>:
+#    BoxLayout:
+#        size_hint:(.1, None)
+#        Label:
+#            text: "Add Activity Details"
+#        TextInput:
+#            id: activity_title
+#        TextInput:
+#            id: activity_description
+#            multiline: True
+#            Button:
+#                id: close_window
+#                text: 'X'
+
+
+#<CameraBox>:
+#    AnchorLayout:
+#        anchor_x: 'center'
+#        anchor_y: 'bottom'
+#
+#        BoxLayout:
+#            id: camera
+#            play: True
+#        ToggleButton:
+#            on_press: camera.play = True
+#            size_hint_y: None
+#            height: '48dp'
+#        Button:
+#            id: close_window
+#            text: 'X'
+
 <ProjectActivityScreen>:
     name: 'projectsactiv'
-    ListView:
-        item_strings: app.projects
-        id: projects
+    id: projname
+    BoxLayout:
+        orientation: 'vertical'
 
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: None, None
+            size: 70, 100
+            Label:
+                padding: 20, 20
+                text: root.projname
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            size: 200, 150
+            GridLayout:
+
+                cols: 2
+                Label:
+                    text: "Stage Description:"
+                TextInput:
+                    size_hint: None, None
+                    height: sp(70)
+                    width: sp(300)
+                    id: age_input
+
+                    multiline: True
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            size: 100, 100
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'bottom'
+
+                BoxLayout:
+                    id: camera
+                    play: True
+                    ToggleButton:
+                        on_press: camera.play = True
+                        size_hint_y: None
+                        height: '48dp'
+                    Button:
+                        id: close_window
+                        text: 'X'
+
+
+#    BoxLayout:
+#        FileChooserListView:
+#            id: filechooser
+#            on_selection: pass#do sth.
+
+
+
+#    GridLayout:
+#
+#        cols: 2
+#        Label:
+#            text: "Patient's Age:"
+#        TextInput:
+#            id: age_input
+#
+#            multiline: True
+
+<ActivityScreen>:
+    name: 'activity'
+
+
+    GridLayout:
+
+        cols: 2
+        Label:
+            text: "Patient's Age:"
+        TextInput:
+            id: age_input
+
+            multiline: True
 
     AnchorLayout:
         anchor_x: 'center'
@@ -168,162 +372,509 @@ MyScreenManager:
         BoxLayout:
             id: camera
             play: True
-
-        ToggleButton:
-            text: "Play"
-            on_press: camera.play = True
-            size_hint_y: None
-            height: '48dp'
-
-        BoxLayout:
-            padding: 50, 50
-            size_hint_x: .8
-            size_hint_y: .3
-
-
-
+            ToggleButton:
+                on_press: camera.play = True
+                size_hint_y: None
+                height: '48dp'
             Button:
-                id: 'projectsButton'
-                on_release: app.root.current = 'projects'
-                background_color: 0,0,0,0
-                Image:
-                    source: 'projects.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 70, 70
+                id: close_window
+                text: 'X'
 
-            Button:
-                id: 'update_project'
-                on_release: app.root.current = 'updateproject'
-                background_color: 0,0,0,0
-                Image:
-                    source: 'projects.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 70, 70
 
-            Button:
-                id: 'project_activities'
-                on_release: app.root.current = 'projectsactiv'
-                background_color: 0,0,0,0
-                Image:
-                    source: 'projects.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 70, 70
+    BoxLayout:
+        FileChooserListView:
+            id: filechooser
+            on_selection: pass#do sth.
 
 
 
 
+
+
+<FixLabel@Label>:
+#    text: 'Hello World!'
+    size_hint: (1, None)
+    height: dp(30)
+
+#<ProjectEditScreen>:
+#    name: 'updateproject'
+#    ScrollView:
+#        do_scroll_x: False
+#        scroll_timeout: 200
+#        scroll_distance: 20
+#        size_hint_x: .8
+#        size_hint_y: .3
+#        GridLayout:
+#            canvas.before:
+#                Color:
+#                    rgb: 0.4,0.4,0.4,1
+#                Rectangle:
+#                    pos: self.pos
+#                    size: self.size
+#            #orientation: 'vertical'
+#            cols: 1
+#            padding: 50, 50
+#            size_hint: (1, None)
+#            height: self.minimum_height
+#            FixLabel
+#            FixLabel
+#            FixLabel
+#            FixLabel
+#            FixLabel
+#            FixLabel
+#            FixLabel
+#            FixLabel
+#            FixLabel
+#            FixLabel
 
 
 <ProjectEditScreen>:
     name: 'updateproject'
-    ListView:
-        item_strings: app.projects
-        id: projects
-
-
-    AnchorLayout:
-        anchor_x: 'center'
-        anchor_y: 'bottom'
-        BoxLayout:
+    ScrollView:
+        do_scroll_x: False
+        scroll_timeout: 200
+        scroll_distance: 20
+        size_hint_x: 1
+        size_hint_y: 1
+        GridLayout:
+            canvas.before:
+                Color:
+                    rgb: 0.4,0.4,0.4,.5
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            #orientation: 'vertical'
+            cols: 1
             padding: 50, 50
-            size_hint_x: .8
-            size_hint_y: .3
+            size_hint: (1, None)
+            height: self.minimum_height
+            FixLabel:
+                text: "Patient's:"
+            TextInput:
+                id: age_input
+                multiline: True
+                height: 50
+                size_hint_y: None
 
-            Button:
-                id: 'projectsButton'
-                on_release: app.root.current = 'projects'
-                background_color: 0,0,0,0
-                Image:
-                    source: 'projects.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 70, 70
+            FixLabel:
+                text: "Was the project identified and selected in consultation with community stakeholders based on their document needs?"
+            CheckBox:
+                group: 'proj_state'
+                active: False
+                size_hint_x: .15
+            CheckBox:
+                group: 'proj_state'
+                value: root.no
+                size_hint_x: .15
+                pos_hint_x: .50
 
-            Button:
-                id: 'update_project'
-                on_release: app.root.current = 'updateproject'
-                background_color: 0,0,0,0
-                Image:
-                    source: 'projects.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 70, 70
+            FixLabel:
+                text: "Was the project prepared in line with MoFEP Composite budget manual?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+                active: True
+            FixLabel:
+                text: "Has District Got a procurement Plan in place and has the plan been updated as required?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+                active: False
+            FixLabel:
+                text: "Was the project advertised in 2 different print media outlets and Public Procurement Authority?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Did the District properly constitute Tender Evaluation Panels as required?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Was there proper Documentation on Bid Opening?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Did the  District officially write to notify all bidders from the winner of the contract?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Did the winning Contractor provide performance securities for the contract?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Was teh contract signed by an authorized person?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Is the project contact sum in line with budget? (Wether  +/- 10% range)?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Are the District Assembly officials playing their expected oversight roles( monitoring of the project)"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Has the District Engineer been supervising the work?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Are Payment Timelines made in line with the terms of contracts?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Does the District conduct detailed check on the Contractors work performance before payments are made?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Does the District Engineer prepare Interim Payment Certificates for each payment?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Does hte District Keep the required percentage of retention from each interim payment?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Did the engineer issue completion and defect liability certificates to the contractor before his final payment?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Was the contractor paid his retention after the defect liability period?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Did the District evaluate their performance in hte implementation of the Project?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "After Completion of the project, did hte District carry out a Project impact Evaluation to access the achievement of the intended benefits?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Was the top Soil removed from the site?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observation about the soil removal"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "is is the site fenced to prevent public from having direct access to the site?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observation about fencing"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Were cake cements being used?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observation of the caked cement"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Does the Sand used in mixing mortar and concrete contain clay or plant roots?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observation about mixing"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Were Quality coarse aggregates (gravel) used?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observation about gravel quality"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Were iron rods stored off ground?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Were the iron rods showing signs of rusting?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observation about iron rods rusting"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Was Mortar and concret hand mixed (using shovel) on bare ground?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observation about mixing on ground"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Were the sand and gravel measured before mixing?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observation about measurement"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Were hardened mortar and concrete remixed for use?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "obsevations about remixing"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Were Concrete Casted in place cure?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observations about Concrete Curing"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Were the joints between blocks sprayed with water before filling with mortar?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observation about blocks being sprayed"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Were the concrete and block wall sprayed with water before screeding and plastering?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observations about walls being sprayed"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Were the roof rafters fixed directly into the wall of the building?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Observations about the rafters being fixed"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Project Progress compared to Contactor's work schedule"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Project being built according to specifications"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Contractor regularly on site?"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Key positive Observations"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Key negative Observations"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Key Challenge requiring Attention to DSC to redress"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Dates when field observation made"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
+            FixLabel:
+                text: "Final issues to report"
+            CheckBox:
+                group: 'proj_state'
+                value: root.yes
+                size_hint_x: .15
 
-            Button:
-                id: 'project_activities'
-                on_release: app.root.current = 'projectsactiv'
-                background_color: 0,0,0,0
-                Image:
-                    source: 'projects.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 70, 70
 
 
 
 
 
-<ActivityScreen>:
-    name: 'activity'
-    AnchorLayout:
-        anchor_x: 'center'
-        anchor_y: 'bottom'
-        BoxLayout:
-            padding: 50, 50
-            size_hint_x: .8
-            size_hint_y: .3
-            Button:
-                id: 'introButton'
-                on_release: app.root.current = 'main'
-                background_color: 0,0,0,0
-                Image:
-                    source: 'home.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 70, 70
+<LocalEvents>:
+    BoxLayout:
+        size_hint:(.1, None)
+        Label:
+            text: "Local Events"
+        TextInput:
+            id: event_title
+        TextInput:
+            id: event_description
+            multiline: True
+        Button:
+            id: save_event
+        Button:
+            id: close_window
+            text: 'X'
 
-            Button:
-                id: 'projectsButton'
-                on_release: app.root.current = 'projects'
-                background_color: 0,0,0,0
-                Image:
-                    source: 'projects.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 70, 70
-
-            Button:
-                id: 'activityButton'
-                on_release: app.root.current = 'activity'
-                background_color: 0,0,0,0
-                Image:
-                    source: 'activities.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 70, 70
-
-            Button:
-                id: 'msgButton'
-                on_release: app.root.current = 'messages'
-                background_color: 0,0,0,0
-                Image:
-                    source: 'messages.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 70, 70
-
-            Button:
-                id: 'profileButton'
-                on_release: app.root.current = 'profile'
-                background_color: 0,0,0,0
-                Image:
-                    source: 'myprofile.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 70, 70
+#
+#<ActivityScreen>:
+#    name: 'activity'
+#    AnchorLayout:
+#        anchor_x: 'center'
+#        anchor_y: 'bottom'
+#        BoxLayout:
+#            padding: 50, 50
+#            size_hint_x: .8
+#            size_hint_y: .3
+#            Button:
+#                id: 'introButton'
+#                on_release: app.root.current = 'main'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'home.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
+#
+#            Button:
+#                id: 'projectsButton'
+#                on_release: app.root.current = 'projects'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'projects.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
+#
+#            Button:
+#                id: 'activityButton'
+#                on_release: app.root.current = 'activity'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'activities.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
+#
+#            Button:
+#                id: 'msgButton'
+#                on_release: app.root.current = 'messages'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'messages.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
+#
+#            Button:
+#                id: 'profileButton'
+#                on_release: app.root.current = 'profile'
+#                background_color: 0,0,0,0
+#                Image:
+#                    source: 'myprofile.png'
+#                    center_x: self.parent.center_x
+#                    center_y: self.parent.center_y
+#                    size: 70, 70
 
 
 
