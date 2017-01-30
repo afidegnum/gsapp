@@ -97,7 +97,7 @@ class StageButton(ListItemButton):
 class GsamApp(App):
     projects = ListProperty([])
     stages = ListProperty([])
-    questions = DictProperty({})
+    questions = DictProperty([])
     answers = DictProperty({})
 
 
@@ -112,7 +112,7 @@ class GsamApp(App):
 
 
             self.questions.update(q)
-            print q
+
 
 
 

@@ -130,9 +130,8 @@ MyScreenManager:
     size_hint_y: None
     height: dp(44)
     Label:
-        text: str(app.questions)
+        text: str(app.questions['name'])
     CheckBox:
-        group: 'radio'
         on_active: root.ans_state()
 
 
